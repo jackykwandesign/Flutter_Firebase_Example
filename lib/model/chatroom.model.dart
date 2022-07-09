@@ -1,26 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_flutter_1/model/todoItem.model.dart';
 
-abstract class JsonModel {
-  String id = '';
-  JsonModel.fromJson(Map<String, dynamic> json);
-}
-
-class TodoItem implements JsonModel {
+class Chatroom implements JsonModel {
+  @override
   String id;
-  String name;
-  bool isFinished = false;
+  List<String> userIds;
+  List<String> userPhotosURLs;
   DateTime createAt = DateTime.now();
   DateTime updateAt = DateTime.now();
 
-  TodoItem({
-    this.id = "",
-    required this.name,
-  });
+  Chatroom({this.id = "", required this.userIds, required this.userPhotosURLs});
 
-  TodoItem.fromJson(Map<String, dynamic> json)
+  Chatroom.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        name = json['name'],
-        isFinished = json['isFinished'],
+        userIds = json['userIds'],
+        userPhotosURLs = json['userPhotosURLs'],
         createAt = json['createAt'] == null
             ? DateTime.now()
             : DateTime.parse(json['createAt'].toDate().toString()),
@@ -30,8 +24,7 @@ class TodoItem implements JsonModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
-      'isFinished': isFinished,
+      'userIds': userIds,
       'createAt': FieldValue.serverTimestamp(),
       'updateAt': FieldValue.serverTimestamp(),
     };

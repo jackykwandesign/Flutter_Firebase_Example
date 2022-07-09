@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_flutter_1/view/authed_page_container.dart';
-import 'package:firebase_flutter_1/view/home_page.dart';
+import 'package:firebase_flutter_1/view/authed_page_container_pageViewer.dart';
 import 'package:firebase_flutter_1/view/login_page.dart';
-import 'package:firebase_flutter_1/view/new_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -31,7 +29,7 @@ class AuthService {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (BuildContext buildContext, user) {
         if (user.hasData) {
-          return AuthedPageContainer();
+          return AuthedPageContainerPageViewer();
         } else {
           return const LoginPage();
         }

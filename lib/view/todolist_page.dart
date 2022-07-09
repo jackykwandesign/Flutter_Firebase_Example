@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_flutter_1/config/firestoreConstant.dart';
+import 'package:firebase_flutter_1/firebase_utils/firestoreConstant.dart';
+import 'package:firebase_flutter_1/firebase_utils/firestore_listener.dart';
 import 'package:firebase_flutter_1/model/todoItem.model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -275,7 +276,7 @@ class _TodoListTabState extends State<TodoListTab>
   }
 
   Future getTodoList() async {
-    final result = await db.collection(FC.todoList.value).get();
+    final result = await db.collection(FC.todoLists.value).get();
     debugPrint('getTodoList: ${result.docs.length.toString()}');
     List<TodoItem> newTodoList = [];
     for (var element in result.docs) {
@@ -287,55 +288,24 @@ class _TodoListTabState extends State<TodoListTab>
   }
 
   Future createToDoList(TodoItem newItem) async {
-    await db.collection(FC.todoList.value).add(newItem.toJson());
+    await db.collection(FC.todoLists.value).add(newItem.toJson());
   }
 
   Future updateTodoItem(String id, TodoItem newTodoItem) async {
-    await db.collection(FC.todoList.value).doc(id).update(newTodoItem.toJson());
+    await db
+        .collection(FC.todoLists.value)
+        .doc(id)
+        .update(newTodoItem.toJson());
   }
 
   Future deleteTodoItem(String id) async {
-    await db.collection(FC.todoList.value).doc(id).delete();
+    await db.collection(FC.todoLists.value).doc(id).delete();
   }
 
   // subscribe to firestore
   firestoreListenerInit() {
     debugPrint('Init firestore listener');
-    db.collection(FC.todoList.value).snapshots().listen((event) {
-      for (var change in event.docChanges) {
-        switch (change.type) {
-          case DocumentChangeType.added:
-            setState(() {
-              todoList.add(TodoItem.fromJson(
-                  {...?change.doc.data(), "id": change.doc.id}));
-            });
-            debugPrint("New TodoItem: ${change.doc.data()}");
-            break;
-          case DocumentChangeType.modified:
-            int foundIndex =
-                todoList.indexWhere((element) => element.id == change.doc.id);
-            if (foundIndex != -1) {
-              setState(() {
-                todoList[foundIndex] = TodoItem.fromJson(
-                    {...?change.doc.data(), "id": change.doc.id});
-              });
-            }
-            debugPrint("Modified TodoItem: ${change.doc.data()}");
-            break;
-          case DocumentChangeType.removed:
-            int foundIndex =
-                todoList.indexWhere((element) => element.id == change.doc.id);
-            if (foundIndex != -1) {
-              setState(() {
-                todoList.removeAt(foundIndex);
-              });
-            }
-            debugPrint("Removed TodoItem: ${change.doc.data()}");
-            break;
-        }
-      }
-    });
-
+    firestoreListener(db, FC.todoLists.value, todoList, setState);
     setState(() {
       isInitFirestoreListener = true;
     });

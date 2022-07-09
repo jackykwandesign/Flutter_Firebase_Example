@@ -4,16 +4,18 @@ import 'package:firebase_flutter_1/view/personal_profile_page.dart';
 import 'package:firebase_flutter_1/view/todolist_page.dart';
 import 'package:flutter/material.dart';
 
-class AuthedPageContainer extends StatefulWidget {
-  AuthedPageContainer({Key? key}) : super(key: key);
+class AuthedPageContainerPageViewer extends StatefulWidget {
+  AuthedPageContainerPageViewer({Key? key}) : super(key: key);
 
   @override
-  State<AuthedPageContainer> createState() => _AuthedPageContainerState();
+  State<AuthedPageContainerPageViewer> createState() =>
+      _AuthedPageContainerPageViewerState();
 }
 
-class _AuthedPageContainerState extends State<AuthedPageContainer>
-    with TickerProviderStateMixin {
-  late TabController _tabController;
+class _AuthedPageContainerPageViewerState
+    extends State<AuthedPageContainerPageViewer> {
+  late PageController _pageController;
+  int currentPageIndex = 0;
 
   List<Widget> pages = [
     const HomeTab(),
@@ -25,16 +27,12 @@ class _AuthedPageContainerState extends State<AuthedPageContainer>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(
-      initialIndex: 0,
-      length: pages.length,
-      vsync: this,
-    );
-    _tabController.addListener(() {
-      setState(
-          () {}); // this is a must to update controller index in build page
-      debugPrint('selected Index = ${_tabController.index}');
-    });
+    _pageController = PageController(initialPage: currentPageIndex);
+    // _pageController.addListener(() {
+    //   setState(
+    //       () {}); // this is a must to update controller index in build page
+    //   debugPrint('selected Index = ${_pageController.page}');
+    // });
   }
 
   @override
@@ -44,9 +42,14 @@ class _AuthedPageContainerState extends State<AuthedPageContainer>
         children: [
           // Text(_tabController.index.toString()),
           Expanded(
-            child: TabBarView(
-              controller: _tabController,
+            child: PageView(
+              controller: _pageController,
               children: pages,
+              onPageChanged: (int newPageIndex) {
+                setState(() {
+                  currentPageIndex = newPageIndex;
+                });
+              },
             ),
           ),
         ],
@@ -77,11 +80,15 @@ class _AuthedPageContainerState extends State<AuthedPageContainer>
               ),
               label: 'Profile')
         ],
-        currentIndex: _tabController.index,
+        currentIndex: currentPageIndex,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         onTap: (int selectIndex) {
-          _tabController.index = selectIndex;
+          _pageController.animateToPage(
+            selectIndex,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.ease,
+          );
         },
       ),
     );
