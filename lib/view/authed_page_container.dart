@@ -1,4 +1,4 @@
-import 'package:firebase_flutter_1/view/chat_page.dart';
+import 'package:firebase_flutter_1/view/chatroom_page.dart';
 import 'package:firebase_flutter_1/view/home_page.dart';
 import 'package:firebase_flutter_1/view/personal_profile_page.dart';
 import 'package:firebase_flutter_1/view/todolist_page.dart';

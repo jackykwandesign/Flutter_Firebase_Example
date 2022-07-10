@@ -220,11 +220,11 @@ class _TodoListTabState extends State<TodoListTab>
               const SizedBox(
                 height: 5,
               ),
-              Text('CreateAt: ${dateFormat.format(todoItem.createAt)}'),
+              Text('CreateAt: ${dateFormat.format(todoItem.createAt!)}'),
               const SizedBox(
                 height: 5,
               ),
-              Text('UpdateAt: ${dateFormat.format(todoItem.updateAt)}'),
+              Text('UpdateAt: ${dateFormat.format(todoItem.updateAt!)}'),
             ],
           ),
         );
@@ -305,7 +305,8 @@ class _TodoListTabState extends State<TodoListTab>
   // subscribe to firestore
   firestoreListenerInit() {
     debugPrint('Init firestore listener');
-    firestoreListener(db, FC.todoLists.value, todoList, setState);
+    firestoreListener(
+        db, FC.todoLists.value, todoList, setState, TodoItem.fromJson);
     setState(() {
       isInitFirestoreListener = true;
     });
