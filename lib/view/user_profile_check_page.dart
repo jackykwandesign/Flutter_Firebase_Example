@@ -1,3 +1,4 @@
+import 'package:chat_me/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:chat_me/firebase_utils/firestore_constant.dart';
@@ -44,39 +45,55 @@ class _UserProfileCheckPageState extends State<UserProfileCheckPage> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            isLoading ? const CircularProgressIndicator() : const SizedBox(),
-            if (!isLoading)
-              Container(
+            if (isLoading)
+              Center(
                 child: Column(
                   children: [
-                    const Text(
-                      'Please complete your personal infomation',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextField(
-                      controller: nickNameController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        label: Text('Nickname'),
-                      ),
-                    ),
+                    const CircularProgressIndicator(),
                     const SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
-                        onPressed: () async {
-                          await upsertUserProfile();
-                          await checkUserProfile();
-                        },
-                        child: const Text('Confirm')),
+                      onPressed: () {
+                        AuthService().signOut();
+                      },
+                      child: const Text('Signout'),
+                    )
                   ],
                 ),
+              )
+            else
+              const SizedBox(),
+            if (!isLoading)
+              Column(
+                children: [
+                  const Text(
+                    'Please complete your personal infomation',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextField(
+                    controller: nickNameController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      label: Text('Nickname'),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                      onPressed: () async {
+                        await upsertUserProfile();
+                        await checkUserProfile();
+                      },
+                      child: const Text('Confirm')),
+                ],
               )
             else
               const SizedBox(),
