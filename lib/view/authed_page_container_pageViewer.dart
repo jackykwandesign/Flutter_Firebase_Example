@@ -5,7 +5,7 @@ import 'package:firebase_flutter_1/view/todolist_page.dart';
 import 'package:flutter/material.dart';
 
 class AuthedPageContainerPageViewer extends StatefulWidget {
-  AuthedPageContainerPageViewer({Key? key}) : super(key: key);
+  const AuthedPageContainerPageViewer({Key? key}) : super(key: key);
 
   @override
   State<AuthedPageContainerPageViewer> createState() =>
@@ -20,7 +20,7 @@ class _AuthedPageContainerPageViewerState
   List<Widget> pages = [
     const HomeTab(),
     const TodoListTab(),
-    ChatroomPage(),
+    const ChatroomPage(),
     PersonalProfileTab()
   ];
 

@@ -7,8 +7,8 @@ class OtherFullPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Center(
-        child: const Text('asdsadsa'),
+      body: const Center(
+        child: Text('asdsadsa'),
       ),
     );
   }

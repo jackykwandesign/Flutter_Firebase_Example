@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TravelPage extends StatefulWidget {
-  TravelPage({Key? key}) : super(key: key);
+  const TravelPage({Key? key}) : super(key: key);
 
   @override
   State<TravelPage> createState() => _TravelPageState();
@@ -11,8 +11,8 @@ class _TravelPageState extends State<TravelPage> with TickerProviderStateMixin {
   late TabController tabController;
   int pageIndex = 0;
   List<Widget> list = [
-    Tab(icon: Icon(Icons.card_travel)),
-    Tab(icon: Icon(Icons.add_shopping_cart)),
+    const Tab(icon: Icon(Icons.card_travel)),
+    const Tab(icon: Icon(Icons.add_shopping_cart)),
   ];
   List<Widget> bodyList = [
     const Center(

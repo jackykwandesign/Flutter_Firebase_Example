@@ -1,29 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_flutter_1/model/todoItem.model.dart';
 
-class UserProfile implements JsonModel {
+class ChatMessage implements JsonModel {
   @override
   String id;
-
-  String name;
-  String? photoURL;
+  String chatroomId;
+  String message;
+  String sendByUserId;
   DateTime? createAt = DateTime.now();
   DateTime? updateAt = DateTime.now();
 
-  UserProfile({
+  ChatMessage({
     this.id = "",
-    required this.name,
-    this.photoURL,
+    required this.chatroomId,
+    required this.message,
+    required this.sendByUserId,
     this.createAt,
     this.updateAt,
   });
 
-  @override
-  factory UserProfile.fromJson(Map<String, dynamic> json) {
-    return UserProfile(
+  factory ChatMessage.fromJson(Map<String, dynamic> json) {
+    return ChatMessage(
       id: json['id'],
-      name: json['name'],
-      photoURL: json['photoURL'],
+      chatroomId: json['chatroomId'],
+      message: json['message'],
+      sendByUserId: json['sendByUserId'],
       createAt: json['createAt'] == null
           ? DateTime.now()
           : DateTime.parse(json['createAt'].toDate().toString()),
@@ -35,8 +36,9 @@ class UserProfile implements JsonModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
-      'photoURL': photoURL,
+      'message': message,
+      'chatroomId': chatroomId,
+      'sendByUserId': sendByUserId,
       'createAt': FieldValue.serverTimestamp(),
       'updateAt': FieldValue.serverTimestamp(),
     };

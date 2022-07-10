@@ -1,23 +1,23 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_flutter_1/model/todoItem.model.dart';
-import 'package:flutter/cupertino.dart';
 
 class Chatroom implements JsonModel {
   @override
   String id;
   List<String> userIds;
   List<String> userPhotosURLs;
+  List<String> userNames;
   DateTime? createAt = DateTime.now();
   DateTime? updateAt = DateTime.now();
 
-  Chatroom(
-      {this.id = "",
-      required this.userIds,
-      required this.userPhotosURLs,
-      this.createAt,
-      this.updateAt});
+  Chatroom({
+    this.id = "",
+    required this.userIds,
+    required this.userPhotosURLs,
+    required this.userNames,
+    this.createAt,
+    this.updateAt,
+  });
 
   factory Chatroom.fromJson(Map<String, dynamic> json) {
     return Chatroom(
@@ -32,6 +32,7 @@ class Chatroom implements JsonModel {
       userPhotosURLs: json['userPhotosURLs'] != null
           ? List.from(json['userPhotosURLs'])
           : [],
+      userNames: json['userNames'] != null ? List.from(json['userNames']) : [],
     );
   }
 

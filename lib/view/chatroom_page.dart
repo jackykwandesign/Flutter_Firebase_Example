@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_flutter_1/firebase_utils/firestoreConstant.dart';
-import 'package:firebase_flutter_1/firebase_utils/firestore_listener.dart';
+import 'package:firebase_flutter_1/firebase_utils/firestore_constant.dart';
 import 'package:firebase_flutter_1/model/chatroom.model.dart';
+import 'package:firebase_flutter_1/view/user_chat_page.dart';
 import 'package:flutter/material.dart';
 
 class ChatroomPage extends StatefulWidget {
@@ -48,8 +48,25 @@ class _ChatroomPageState extends State<ChatroomPage> {
               ),
               itemBuilder: (_, int index) {
                 Chatroom chatroom = chatrooms[index];
-                return Row(
-                  children: [Text(chatroom.userIds.toString())],
+                return GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                      return UserChatPage(
+                        chatroom: chatroom,
+                      );
+                    }));
+                  },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          chatroom.userIds.toString(),
+                          // overflow: TextOverflow.ellipsis,
+                        ),
+                      )
+                    ],
+                  ),
                 );
               },
               itemCount: chatrooms.length,
@@ -75,13 +92,13 @@ class _ChatroomPageState extends State<ChatroomPage> {
     });
   }
 
-  // subscribe to firestore
-  firestoreListenerInit() {
-    debugPrint('Init firestore listener');
-    firestoreListener(
-        db, FC.chatrooms.value, chatrooms, setState, Chatroom.fromJson);
-    setState(() {
-      isInitFirestoreListener = true;
-    });
-  }
+  // // subscribe to firestore
+  // firestoreListenerInit() {
+  //   debugPrint('Init firestore listener');
+  //   firestoreListener(
+  //       db, FC.chatrooms.value, chatrooms, setState, Chatroom.fromJson);
+  //   setState(() {
+  //     isInitFirestoreListener = true;
+  //   });
+  // }
 }

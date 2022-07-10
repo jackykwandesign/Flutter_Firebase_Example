@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_flutter_1/firebase_utils/firestoreConstant.dart';
+import 'package:firebase_flutter_1/firebase_utils/firestore_constant.dart';
 import 'package:firebase_flutter_1/firebase_utils/firestore_listener.dart';
 import 'package:firebase_flutter_1/model/todoItem.model.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +30,7 @@ class _TodoListTabState extends State<TodoListTab>
   }
 
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -305,8 +306,8 @@ class _TodoListTabState extends State<TodoListTab>
   // subscribe to firestore
   firestoreListenerInit() {
     debugPrint('Init firestore listener');
-    firestoreListener(
-        db, FC.todoLists.value, todoList, setState, TodoItem.fromJson);
+    getFirestoreListener(db.collection(FC.todoLists.value).snapshots(),
+        todoList, setState, TodoItem.fromJson);
     setState(() {
       isInitFirestoreListener = true;
     });

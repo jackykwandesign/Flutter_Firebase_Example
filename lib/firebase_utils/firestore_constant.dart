@@ -1,8 +1,8 @@
 enum FC {
   todoLists("TODO_LISTS"),
-  users("USERS"),
+  userProfiles("USERPROFILES"),
   chatrooms("CHATROOMS"),
-  userChatRoom("USER_CHATROOM");
+  chatMessages("CHAT_MESSAGES");
 
   const FC(this.value);
   final String value;
