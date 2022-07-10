@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_flutter_1/model/todoItem.model.dart';
+import 'package:chat_me/model/todoItem.model.dart';
 
 class ChatMessage implements JsonModel {
   @override

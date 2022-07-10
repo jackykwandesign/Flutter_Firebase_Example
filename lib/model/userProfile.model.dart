@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_flutter_1/model/todoItem.model.dart';
+import 'package:chat_me/model/todoItem.model.dart';
 
 List<UserProfile> sortUserProfilesById(UserProfile userA, UserProfile userB) {
   List<UserProfile> userProfiles = [userA, userB];
@@ -22,7 +22,7 @@ class UserProfile implements JsonModel {
     required this.userId,
     required this.name,
     required this.nameLowerCaseNoSpace,
-    this.photoURL,
+    this.photoURL = '',
     this.createAt,
     this.updateAt,
   });
@@ -47,8 +47,8 @@ class UserProfile implements JsonModel {
   Map<String, dynamic> toJson() {
     return {
       'name': name,
-      'nameLowerCase': nameLowerCaseNoSpace,
       'userId': userId,
+      'nameLowerCaseNoSpace': nameLowerCaseNoSpace,
       'photoURL': photoURL,
       'createAt': FieldValue.serverTimestamp(),
       'updateAt': FieldValue.serverTimestamp(),

@@ -1,7 +1,7 @@
-import 'package:firebase_flutter_1/view/chatroom_page.dart';
-import 'package:firebase_flutter_1/view/home_page.dart';
-import 'package:firebase_flutter_1/view/personal_profile_page.dart';
-import 'package:firebase_flutter_1/view/todolist_page.dart';
+import 'package:chat_me/view/chatroom_page.dart';
+import 'package:chat_me/view/home_page.dart';
+import 'package:chat_me/view/personal_profile_page.dart';
+import 'package:chat_me/view/todolist_page.dart';
 import 'package:flutter/material.dart';
 
 class AuthedPageContainerPageViewer extends StatefulWidget {

@@ -1,6 +1,6 @@
 {
-    "name": "firebase_flutter_1",
-    "short_name": "firebase_flutter_1",
+    "name": "chat_me",
+    "short_name": "chat_me",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

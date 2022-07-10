@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_flutter_1/firebase_utils/firestore_constant.dart';
-import 'package:firebase_flutter_1/firebase_utils/firestore_listener.dart';
-import 'package:firebase_flutter_1/model/todoItem.model.dart';
+import 'package:chat_me/firebase_utils/firestore_constant.dart';
+import 'package:chat_me/firebase_utils/firestore_listener.dart';
+import 'package:chat_me/model/todoItem.model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

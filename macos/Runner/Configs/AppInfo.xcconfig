@@ -5,7 +5,7 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = firebase_flutter_1
+PRODUCT_NAME = chat_me
 
 // The application's bundle identifier
 PRODUCT_BUNDLE_IDENTIFIER = com.example.firebaseFlutter1

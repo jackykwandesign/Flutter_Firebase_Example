@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_flutter_1/firebase_utils/firestore_constant.dart';
-import 'package:firebase_flutter_1/model/userProfile.model.dart';
-import 'package:firebase_flutter_1/view/authed_page_container.dart';
+import 'package:chat_me/firebase_utils/firestore_constant.dart';
+import 'package:chat_me/model/userProfile.model.dart';
+import 'package:chat_me/view/authed_page_container.dart';
 import 'package:flutter/material.dart';
 
 class UserProfileCheckPage extends StatefulWidget {

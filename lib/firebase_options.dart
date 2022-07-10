@@ -45,7 +45,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyD2yFNBYXOtnDi1vQkB8QfDoGMB6evIUnk',
-    appId: '1:470611045203:web:a2a9c8093bfe20b30a8fa6',
+    appId: '1:470611045203:web:34c0bdfda863a9a90a8fa6',
     messagingSenderId: '470611045203',
     projectId: 'flutter-firebase-test-1-eda40',
     authDomain: 'flutter-firebase-test-1-eda40.firebaseapp.com',
@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDUooM2WVcK2XWxYmxJpvsBql0i6FM_jow',
-    appId: '1:470611045203:android:c8975d065ac4fa2e0a8fa6',
+    appId: '1:470611045203:android:144fa7b5008bef6d0a8fa6',
     messagingSenderId: '470611045203',
     projectId: 'flutter-firebase-test-1-eda40',
     storageBucket: 'flutter-firebase-test-1-eda40.appspot.com',
@@ -62,7 +62,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyC2PK6zfDIJH9PsdRsOLdJzFKc31vdsWnQ',
-    appId: '1:470611045203:ios:6a11fd891eb711460a8fa6',
+    appId: '1:470611045203:ios:f823833f5891e10f0a8fa6',
     messagingSenderId: '470611045203',
     projectId: 'flutter-firebase-test-1-eda40',
     storageBucket: 'flutter-firebase-test-1-eda40.appspot.com',
@@ -73,7 +73,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyC2PK6zfDIJH9PsdRsOLdJzFKc31vdsWnQ',
-    appId: '1:470611045203:ios:6a11fd891eb711460a8fa6',
+    appId: '1:470611045203:ios:f823833f5891e10f0a8fa6',
     messagingSenderId: '470611045203',
     projectId: 'flutter-firebase-test-1-eda40',
     storageBucket: 'flutter-firebase-test-1-eda40.appspot.com',

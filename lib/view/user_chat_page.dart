@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_flutter_1/firebase_utils/firestore_constant.dart';
-import 'package:firebase_flutter_1/firebase_utils/firestore_listener.dart';
-import 'package:firebase_flutter_1/model/chatMessage.model.dart';
-import 'package:firebase_flutter_1/model/chatroom.model.dart';
+import 'package:chat_me/firebase_utils/firestore_constant.dart';
+import 'package:chat_me/firebase_utils/firestore_listener.dart';
+import 'package:chat_me/model/chatMessage.model.dart';
+import 'package:chat_me/model/chatroom.model.dart';
 import 'package:flutter/material.dart';
 
 class UserChatPage extends StatefulWidget {

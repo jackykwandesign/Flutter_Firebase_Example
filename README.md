@@ -1,4 +1,4 @@
-# firebase_flutter_1
+# chat_me
 
 A new Flutter project.
 

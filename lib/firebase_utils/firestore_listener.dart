@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_flutter_1/model/todoItem.model.dart';
+import 'package:chat_me/model/todoItem.model.dart';
 import 'package:flutter/material.dart';
 
 Future<StreamSubscription<QuerySnapshot<Map<String, dynamic>>>>
