@@ -34,10 +34,7 @@ class _UserChatPageState extends State<UserChatPage> {
         .collection(FC.chatMessages.value);
 
     inputMessageController = TextEditingController();
-    getChatMessage();
-    if (!isInitFirestoreListener) {
-      firestoreListenerInit();
-    }
+    initFunction();
     super.initState();
   }
 
@@ -203,116 +200,22 @@ class _UserChatPageState extends State<UserChatPage> {
     inputMessageController.clear();
   }
 
+  Future initFunction() async {
+    await getChatMessage();
+    if (!isInitFirestoreListener) {
+      await firestoreListenerInit();
+    }
+  }
+
   // subscribe to firestore
   Future firestoreListenerInit() async {
     debugPrint('Init firestore listener');
-    // firestoreListener = await getFirestoreListener(
-    //   chatMessageCollection.orderBy("createAt", descending: false).snapshots(),
-    //   chatMessages,
-    //   setState,
-    //   ChatMessage.fromJson,
-    // );
-
-    firestoreListener = chatMessageCollection
-        .orderBy("createAt", descending: false)
-        .snapshots()
-        .listen(
-      (event) {
-        for (var change in event.docChanges) {
-          switch (change.type) {
-            case DocumentChangeType.added:
-              int foundIndex = chatMessages
-                  .indexWhere((element) => element.id == change.doc.id);
-              if (foundIndex == -1) {
-                debugPrint('NEW ITEM: old length ${chatMessages.length}');
-                setState(() {
-                  chatMessages.add(ChatMessage.fromJson(
-                      {...?change.doc.data(), "id": change.doc.id}));
-                });
-                debugPrint('NEW ITEM: new length ${chatMessages.length}');
-                debugPrint(
-                    "New ${chatMessages.runtimeType} Item: ${change.doc.data()}");
-              }
-
-              break;
-            case DocumentChangeType.modified:
-              int foundIndex = chatMessages
-                  .indexWhere((element) => element.id == change.doc.id);
-              if (foundIndex != -1) {
-                setState(() {
-                  chatMessages[foundIndex] = ChatMessage.fromJson(
-                      {...?change.doc.data(), "id": change.doc.id});
-                });
-                debugPrint(
-                    "Modified ${chatMessages.runtimeType}: ${change.doc.data()}");
-              }
-
-              break;
-            case DocumentChangeType.removed:
-              int foundIndex = chatMessages
-                  .indexWhere((element) => element.id == change.doc.id);
-              if (foundIndex != -1) {
-                setState(() {
-                  chatMessages.removeAt(foundIndex);
-                });
-                debugPrint(
-                    "Removed ${chatMessages.runtimeType}: ${change.doc.data()}");
-              }
-
-              break;
-          }
-        }
-      },
+    firestoreListener = await getFirestoreListener(
+      chatMessageCollection.orderBy("createAt", descending: false).snapshots(),
+      chatMessages,
+      setState,
+      ChatMessage.fromJson,
     );
-    // chatMessageCollection
-    //     .orderBy("createAt", descending: false)
-    //     .snapshots()
-    //     .listen(
-    //   (event) {
-    //     for (var change in event.docChanges) {
-    //       switch (change.type) {
-    //         case DocumentChangeType.added:
-    //           int foundIndex = chatMessages
-    //               .indexWhere((element) => element.id == change.doc.id);
-    //           if (foundIndex == -1) {
-    //             setState(() {
-    //               chatMessages.add(ChatMessage.fromJson(
-    //                   {...?change.doc.data(), "id": change.doc.id}));
-    //             });
-    //             debugPrint(
-    //                 "New ${chatMessages.runtimeType} Item: ${change.doc.data()}");
-    //           }
-
-    //           break;
-    //         case DocumentChangeType.modified:
-    //           int foundIndex = chatMessages
-    //               .indexWhere((element) => element.id == change.doc.id);
-    //           if (foundIndex != -1) {
-    //             setState(() {
-    //               chatMessages[foundIndex] = ChatMessage.fromJson(
-    //                   {...?change.doc.data(), "id": change.doc.id});
-    //             });
-    //             debugPrint(
-    //                 "Modified ${chatMessages.runtimeType}: ${change.doc.data()}");
-    //           }
-
-    //           break;
-    //         case DocumentChangeType.removed:
-    //           int foundIndex = chatMessages
-    //               .indexWhere((element) => element.id == change.doc.id);
-    //           if (foundIndex != -1) {
-    //             setState(() {
-    //               chatMessages.removeAt(foundIndex);
-    //             });
-    //             debugPrint(
-    //                 "Removed ${chatMessages.runtimeType}: ${change.doc.data()}");
-    //           }
-
-    //           break;
-    //       }
-    //     }
-    //   },
-    // );
 
     setState(() {
       isInitFirestoreListener = true;

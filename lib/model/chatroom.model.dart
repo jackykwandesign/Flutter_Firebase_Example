@@ -39,6 +39,8 @@ class Chatroom implements JsonModel {
   Map<String, dynamic> toJson() {
     return {
       'userIds': userIds,
+      'userPhotosURLs': userPhotosURLs,
+      'userNames': userNames,
       'createAt': FieldValue.serverTimestamp(),
       'updateAt': FieldValue.serverTimestamp(),
     };

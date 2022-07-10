@@ -108,7 +108,11 @@ class _UserProfileCheckPageState extends State<UserProfileCheckPage> {
 
   Future upsertUserProfile() async {
     UserProfile newUserProfile = UserProfile(
-        name: nickNameController.text, photoURL: currentUser?.photoURL);
+      name: nickNameController.text,
+      nameLowerCaseNoSpace: nickNameController.text.toLowerCase().trim(),
+      photoURL: currentUser?.photoURL,
+      userId: currentUser!.uid,
+    );
     final createUserProfileResult = await userProfileCollection
         .doc(currentUser!.uid)
         .set(newUserProfile.toJson());
