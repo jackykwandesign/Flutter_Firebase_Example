@@ -10,6 +10,7 @@ class TodoItem implements JsonModel {
   String id;
 
   String name;
+  String userId;
   bool isFinished;
   DateTime? createAt = DateTime.now();
   DateTime? updateAt = DateTime.now();
@@ -17,6 +18,7 @@ class TodoItem implements JsonModel {
   TodoItem(
       {this.id = "",
       required this.name,
+      required this.userId,
       this.isFinished = false,
       this.createAt,
       this.updateAt});
@@ -26,6 +28,7 @@ class TodoItem implements JsonModel {
     return TodoItem(
       id: json['id'],
       name: json['name'],
+      userId: json['userId'],
       isFinished: json['isFinished'],
       createAt: json['createAt'] == null
           ? DateTime.now()
@@ -39,6 +42,7 @@ class TodoItem implements JsonModel {
   Map<String, dynamic> toJson() {
     return {
       'name': name,
+      'userId': userId,
       'isFinished': isFinished,
       'createAt': FieldValue.serverTimestamp(),
       'updateAt': FieldValue.serverTimestamp(),

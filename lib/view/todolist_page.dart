@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_flutter_1/firebase_utils/firestore_constant.dart';
 import 'package:firebase_flutter_1/firebase_utils/firestore_listener.dart';
 import 'package:firebase_flutter_1/model/todoItem.model.dart';
@@ -15,14 +16,21 @@ class TodoListTab extends StatefulWidget {
 class _TodoListTabState extends State<TodoListTab>
     with AutomaticKeepAliveClientMixin {
   final db = FirebaseFirestore.instance;
+  late CollectionReference<Map<String, dynamic>> todoListCollection;
   List<TodoItem> todoList = [];
   bool isInitFirestoreListener = false;
   DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+  final currentUser = FirebaseAuth.instance.currentUser;
+
   @override
   bool get wantKeepAlive => true;
 
   @override
   void initState() {
+    todoListCollection = db
+        .collection(FC.todoLists.value)
+        .doc(currentUser!.uid)
+        .collection(FC.todoLists.value);
     if (!isInitFirestoreListener) {
       firestoreListenerInit();
     }
@@ -118,7 +126,8 @@ class _TodoListTabState extends State<TodoListTab>
             setState(() {
               isLoading = true;
             });
-            await createToDoList(TodoItem(name: nameController.text));
+            await createToDoList(
+                TodoItem(name: nameController.text, userId: currentUser!.uid));
             // await getTodoList();
             if (!mounted) {
               return;
@@ -277,7 +286,7 @@ class _TodoListTabState extends State<TodoListTab>
   }
 
   Future getTodoList() async {
-    final result = await db.collection(FC.todoLists.value).get();
+    final result = await todoListCollection.get();
     debugPrint('getTodoList: ${result.docs.length.toString()}');
     List<TodoItem> newTodoList = [];
     for (var element in result.docs) {
@@ -289,25 +298,22 @@ class _TodoListTabState extends State<TodoListTab>
   }
 
   Future createToDoList(TodoItem newItem) async {
-    await db.collection(FC.todoLists.value).add(newItem.toJson());
+    await todoListCollection.add(newItem.toJson());
   }
 
   Future updateTodoItem(String id, TodoItem newTodoItem) async {
-    await db
-        .collection(FC.todoLists.value)
-        .doc(id)
-        .update(newTodoItem.toJson());
+    await todoListCollection.doc(id).update(newTodoItem.toJson());
   }
 
   Future deleteTodoItem(String id) async {
-    await db.collection(FC.todoLists.value).doc(id).delete();
+    await todoListCollection.doc(id).delete();
   }
 
   // subscribe to firestore
   firestoreListenerInit() {
     debugPrint('Init firestore listener');
-    getFirestoreListener(db.collection(FC.todoLists.value).snapshots(),
-        todoList, setState, TodoItem.fromJson);
+    getFirestoreListener(
+        todoListCollection.snapshots(), todoList, setState, TodoItem.fromJson);
     setState(() {
       isInitFirestoreListener = true;
     });

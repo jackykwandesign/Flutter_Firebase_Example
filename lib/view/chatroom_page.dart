@@ -57,7 +57,7 @@ class _ChatroomPageState extends State<ChatroomPage> {
                       Chatroom chatroom = chatrooms[index];
                       int indexOfTargetUser =
                           chatroom.userIds.indexOf(currentUser!.uid);
-                      debugPrint('indexOfTargetUser ${indexOfTargetUser}');
+                      debugPrint('indexOfTargetUser $indexOfTargetUser');
                       if (indexOfTargetUser == -1) {
                         return const SizedBox();
                       }
