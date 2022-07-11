@@ -105,6 +105,7 @@ class _TodoListTabState extends State<TodoListTab>
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: "ADD_TODOLIST",
         child: const Icon(Icons.add),
         onPressed: () async {
           // await createToDoList();
@@ -142,6 +143,7 @@ class _TodoListTabState extends State<TodoListTab>
             title: const Text('Create a todo item'),
             content: TextField(
               controller: nameController,
+              autofocus: true,
               decoration: const InputDecoration(label: Text('name')),
             ),
             actions: <Widget>[

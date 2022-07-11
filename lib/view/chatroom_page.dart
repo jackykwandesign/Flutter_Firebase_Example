@@ -55,12 +55,11 @@ class _ChatroomPageState extends State<ChatroomPage> {
                     ),
                     itemBuilder: (_, int index) {
                       Chatroom chatroom = chatrooms[index];
-                      int indexOfTargetUser =
-                          chatroom.userIds.indexOf(currentUser!.uid);
-                      debugPrint('indexOfTargetUser $indexOfTargetUser');
-                      if (indexOfTargetUser == -1) {
-                        return const SizedBox();
+                      int indexOfTargetUser = 0;
+                      if (chatroom.userIds[0] == currentUser!.uid) {
+                        indexOfTargetUser = 1;
                       }
+
                       return GestureDetector(
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
@@ -96,6 +95,7 @@ class _ChatroomPageState extends State<ChatroomPage> {
               ],
             ),
       floatingActionButton: FloatingActionButton(
+        heroTag: "ADD_CHATROOM",
         onPressed: () async {
           final preFetchContacts = await getContacts(null);
           if (!mounted) {

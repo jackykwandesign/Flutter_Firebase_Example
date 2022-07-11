@@ -88,11 +88,18 @@ class _UserProfileCheckPageState extends State<UserProfileCheckPage> {
                     height: 20,
                   ),
                   ElevatedButton(
-                      onPressed: () async {
-                        await upsertUserProfile();
-                        await checkUserProfile();
-                      },
-                      child: const Text('Confirm')),
+                    onPressed: () async {
+                      await upsertUserProfile();
+                      await checkUserProfile();
+                    },
+                    child: const Text('Confirm'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      AuthService().signOut();
+                    },
+                    child: const Text('Signout'),
+                  )
                 ],
               )
             else
