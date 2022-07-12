@@ -62,13 +62,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyC2PK6zfDIJH9PsdRsOLdJzFKc31vdsWnQ',
-    appId: '1:470611045203:ios:f823833f5891e10f0a8fa6',
+    appId: '1:470611045203:ios:1bd3864935d03bbb0a8fa6',
     messagingSenderId: '470611045203',
     projectId: 'flutter-firebase-test-1-eda40',
     storageBucket: 'flutter-firebase-test-1-eda40.appspot.com',
-    androidClientId: '470611045203-h5il3qo8gj7jh6ldb24v5s8qc3071b66.apps.googleusercontent.com',
-    iosClientId: '470611045203-lr1n0u2sm6fed7t2j9agkmocb07qbq4k.apps.googleusercontent.com',
-    iosBundleId: 'com.example.firebaseFlutter1',
+    androidClientId: '470611045203-319fth6i8pn9hch1p1qh4hljctnp6t4v.apps.googleusercontent.com',
+    iosClientId: '470611045203-i31i4j80uudn6eitn99ja1h6iok1vtsf.apps.googleusercontent.com',
+    iosBundleId: 'com.inno24studio.ChatMe',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -77,7 +77,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '470611045203',
     projectId: 'flutter-firebase-test-1-eda40',
     storageBucket: 'flutter-firebase-test-1-eda40.appspot.com',
-    androidClientId: '470611045203-h5il3qo8gj7jh6ldb24v5s8qc3071b66.apps.googleusercontent.com',
+    androidClientId: '470611045203-319fth6i8pn9hch1p1qh4hljctnp6t4v.apps.googleusercontent.com',
     iosClientId: '470611045203-lr1n0u2sm6fed7t2j9agkmocb07qbq4k.apps.googleusercontent.com',
     iosBundleId: 'com.example.firebaseFlutter1',
   );
